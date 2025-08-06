@@ -1,0 +1,51 @@
+/* Orders Manager Application Styles */
+
+.orders-list-section {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  background: var(--window-sidebar-bg);
+  flex-shrink: 0;
+  transition: width 0.18s;
+}
+
+.orders-manager-content .compose-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: var(--accent-color);
+  color: #fff;
+  font-weight: 500;
+  transition: 0.18s background;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  height: 36px;
+}
+
+.orders-list-item {
+  display: flex;
+  padding: 14px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background 0.18s;
+  user-select: none;
+  position: relative;
+  align-items: center;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.orders-list-item:hover {
+  background: var(--dark-mode-hover);
+}
+
+.orders-manager-window .window-toolbar {
+  padding: 8px 20px;
+  background: var(--window-toolbar-bg);
+  border-bottom: 1px solid var(--border-color);
+  height: 45px;
+} 

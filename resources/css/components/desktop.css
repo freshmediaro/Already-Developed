@@ -1,0 +1,673 @@
+/* Desktop Icons */
+.desktop-icons {
+  display: grid;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  align-items: start;
+  flex-grow: 1;
+  overflow-y: auto;
+  grid-template-columns: repeat(auto-fill, minmax(var(--grid-cell-width), 1fr));
+  grid-auto-rows: minmax(var(--grid-cell-height), auto);
+  gap: var(--grid-gap);
+  padding: 15px;
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  width: var(--grid-cell-width);
+  height: var(--grid-cell-height);
+  transition: all 0.3s;
+  border-radius: 10px;
+}
+
+.desktop-icon:hover {
+  transform: scale(1.10);
+}
+
+.desktop-icon.selected span {
+  background: var(--dark-mode-hover);
+  color: #fff;
+  border-radius: 6px;
+  padding: 2px 8px;
+  transition: background 0.18s, color 0.18s;
+}
+
+.icon-container {
+  width: 50px;
+  height: 50px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s;
+}
+
+.desktop-icon span {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  user-select: none;
+  margin-top: 8px;
+  padding: 2px 8px;
+}
+
+.desktop-icon i {
+  font-size: 24px;
+  color: white;
+}
+
+/* Start Menu */
+.start-menu {
+  position: absolute;
+  bottom: 70px;
+  left: 15px;
+  width: 680px;
+  max-height: calc(100vh - 50px);
+  background-color: #08041fcc;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow: visible;
+  z-index: 1100;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: none;
+  flex-direction: column;
+  padding: 0;
+  transition: all 0.3s;
+}
+
+.start-menu.visible {
+  display: flex;
+}
+
+/* Start Menu Profile Header */
+.start-menu-profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 20px 20px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: absolute;
+  right: 50px;
+  top: -80px;
+}
+
+.site-logo-container {
+  margin-bottom: 15px;
+}
+
+.site-logo-square {
+  width: 72px;
+  height: 72px;
+  background-color: #fff;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.user-greeting {
+  font-size: 18px;
+  font-weight: 600;
+  color: #E0E0E0;
+  margin-bottom: 4px;
+}
+
+.user-site-url {
+  font-size: 13px;
+  color: #A0A0B0;
+}
+
+/* Start Menu Body */
+.start-menu-body {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  max-height: calc(100vh - 280px);
+}
+
+/* Left Panel (App Grid) */
+.start-menu-left-panel {
+  flex-grow: 1;
+  padding: 0;
+  border-right: none;
+  overflow-y: auto;
+  max-width: 420px;
+  padding: 10px 30px;
+}
+
+.installed-apps-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.installed-apps-header h3 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #E0E0E0;
+  margin-bottom: 0;
+}
+
+.start-menu-category-link {
+  font-size: 12px;
+  color: #A0A0B0;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.start-menu-category-link i {
+  margin-right: 5px;
+  font-size: 13px;
+}
+
+.app-grid-section {
+  margin-top: 20px;
+}
+
+.app-grid-section:first-child h4 {
+  margin-top: 0;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 15px;
+  justify-items: center;
+}
+
+.app-grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.app-grid-item:hover {
+  transform: scale(1.10);
+}
+
+.app-icon-bg {
+  width: 50px;
+  height: 50px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  color: white;
+}
+
+.app-icon-bg i {
+  font-size: 24px;
+}
+
+.app-grid-item span {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+  overflow: visible;
+  max-width: 100%;
+}
+
+/* Right Sidebar */
+.start-menu-right-sidebar {
+  width: 255px;
+  flex-shrink: 0;
+  padding: 0;
+  overflow-y: hidden;
+}
+
+.start-menu-right-sidebar .menu-section {
+  margin-bottom: 25px;
+}
+
+.start-menu-right-sidebar .menu-section:last-child {
+  margin-bottom: 0;
+}
+
+.start-menu-right-sidebar-body {
+  padding: 20px;
+  overflow-y: auto;
+  max-height: calc(100vh - 450px);
+}
+
+.menu-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-links-list li a.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.menu-links-list li a.menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #FFFFFF;
+}
+
+.menu-links-list li a.menu-item i:first-child {
+  width: 20px;
+  margin-right: 12px;
+  font-size: 15px;
+  text-align: center;
+  color: #A0A0B0;
+}
+
+.menu-links-list li a.menu-item:hover i:first-child {
+  color: #FFFFFF;
+}
+
+.menu-links-list li a.menu-item span {
+  flex-grow: 1;
+}
+
+.menu-links-list li a.menu-item i.fa-chevron-right {
+  font-size: 10px;
+  color: #707080;
+}
+
+.context-menu-chevron {
+  margin-left: auto;
+  margin-right: 0 !important;
+  font-size: 10px !important;
+  color: #707080 !important;
+}
+
+.menu-links-list li a.menu-item:hover i.fa-chevron-right {
+  color: #A0A0B0;
+}
+
+/* Start Menu Footer */
+.start-menu-footer {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  height: 51px;
+}
+
+/* Search Bar in Footer */
+.start-menu-footer .start-menu-search-bar-bottom {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  padding: 2px 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-right: 1px solid var(--border-color);
+  height: 100%;
+}
+
+.start-menu-footer .start-menu-search-bar-bottom:active, 
+.start-menu-footer .start-menu-search-bar-bottom:focus, 
+.start-menu-footer .start-menu-search-bar-bottom:hover, 
+.start-menu-footer .start-menu-search-bar-bottom:target {
+  background-color: var(--input-bg-active) !important;
+}
+
+.start-menu-footer .search-icon-bottom {
+  color: #808090;
+  margin-right: 10px;
+  font-size: 15px;
+}
+
+.start-menu-footer .start-menu-search-input-bottom {
+  flex-grow: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-color);
+  font-size: 14px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 40px;
+}
+
+.start-menu-footer .start-menu-search-input-bottom::placeholder {
+  color: #808090;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Logout Button */
+.start-menu-logout-button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #A0A0B0;
+  font-size: 14px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  justify-content: center;
+  width: 180px;
+  height: 100%;
+}
+
+.start-menu-logout-button:hover {
+  background-color: var(--accent-color);
+  color: #FFFFFF;
+}
+
+.start-menu-logout-button i {
+  margin-right: 8px;
+  font-size: 15px;
+}
+
+/* Background Color Classes for App Icons */
+.blue-bg { background-color: #0078d4; }
+.green-bg { background-color: #107c10; }
+.blue-app-bg { background-color: #005a9e; }
+.gray-bg { background-color: #555; }
+.orange-bg { background-color: #ca5010; }
+.red-bg { background-color: #d93b3b; }
+.purple-bg { background-color: #8f4bc6; }
+.teal-bg { background-color: #008272; }
+.indigo-bg { background-color: #4f4db3; }
+.blue-grey-bg { background-color: #607d8b; }
+.amber-bg { background-color: #ffc107; }
+.cyan-bg { background-color: #00bcd4; }
+.pink-bg { background-color: #e91e63; }
+.deep-purple-bg { background-color: #673ab7; }
+.light-green-bg { background-color: #8bc34a; }
+.lime-bg { background-color: #cddc39; }
+.black-bg { background-color: #222; }
+
+/* Light background icons need dark text */
+.amber-bg i, .lime-bg i {
+  color: #333;
+}
+
+/* Windows 11 Style Start Menu Option */
+.start-menu-style-windows11 .start-menu-right-sidebar-header {
+  display: none;
+}
+
+.start-menu-style-windows11 .start-menu-right-sidebar-body {
+  width: 100%;
+  max-width: none;
+  padding: 0 32px 0 32px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  overflow-y: auto;
+  max-height: 150px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Start Menu Icon Classes - Pseudo Elements to replace FontAwesome */
+
+.sort-icon::before {
+  content: '';
+  position: relative;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 6px solid currentColor;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.menu-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+.menu-icon-rocket::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  width: 8px;
+  height: 16px;
+  background-color: currentColor;
+  clip-path: polygon(50% 0%, 0% 100%, 30% 80%, 50% 85%, 70% 80%, 100% 100%);
+}
+
+.menu-icon-box::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid currentColor;
+  border-top: 4px solid currentColor;
+}
+
+.menu-icon-dollar::before {
+  content: '$';
+  position: absolute;
+  top: 2px;
+  left: 7px;
+  font-size: 14px;
+  font-weight: bold;
+  color: currentColor;
+}
+
+.menu-icon-chart::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 4px;
+  width: 3px;
+  height: 8px;
+  background-color: currentColor;
+  box-shadow: 4px -2px 0 currentColor, 8px -4px 0 currentColor;
+}
+
+.menu-icon-bullhorn::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  border: 2px solid currentColor;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(45deg);
+}
+
+.menu-icon-wallet::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 4px;
+  width: 12px;
+  height: 8px;
+  border: 2px solid currentColor;
+  border-radius: 2px;
+}
+
+.menu-icon-wallet::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 4px;
+  height: 4px;
+  background-color: currentColor;
+  border-radius: 1px;
+}
+
+.menu-chevron::before {
+  content: '';
+  position: relative;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(-45deg);
+  margin-left: auto;
+}
+
+/* Settings Menu Icons */
+.menu-icon-settings::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+}
+
+.menu-icon-settings::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 4px;
+  height: 4px;
+  background-color: currentColor;
+  border-radius: 50%;
+}
+
+.menu-icon-advanced::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  background-color: currentColor;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.menu-icon-notifications::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  width: 8px;
+  height: 10px;
+  border: 2px solid currentColor;
+  border-radius: 4px 4px 0 0;
+}
+
+.menu-icon-notifications::after {
+  content: '';
+  position: absolute;
+  top: 13px;
+  left: 8px;
+  width: 4px;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 2px;
+}
+
+.menu-icon-language::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+}
+
+.menu-icon-language::after {
+  content: 'A';
+  position: absolute;
+  top: 7px;
+  left: 8px;
+  font-size: 8px;
+  font-weight: bold;
+  color: currentColor;
+  transform: translateX(-50%);
+}
+
+.menu-icon-team::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 8px;
+  height: 6px;
+  border: 2px solid currentColor;
+  border-radius: 50% 50% 0 0;
+}
+
+.menu-icon-team::after {
+  content: '';
+  position: absolute;
+  top: 11px;
+  left: 4px;
+  width: 12px;
+  height: 3px;
+  background-color: currentColor;
+  border-radius: 1px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .desktop-icons {
+    grid-template-columns: repeat(auto-fill, 70px);
+    grid-auto-rows: 90px;
+    padding: 10px;
+  }
+  
+  .desktop-icon {
+    width: 70px;
+    height: 90px;
+  }
+  
+  .icon-container {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .desktop-icon span {
+    font-size: 11px;
+    max-width: 60px;
+  }
+  
+  .start-menu {
+    left: 10px;
+    right: 10px;
+    width: auto;
+  }
+} 

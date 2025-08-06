@@ -1,0 +1,565 @@
+/* ===== Desktop OS Animations (Complete from Static Files) ===== */
+
+/* --- Core Window Animations --- */
+@keyframes windowOpenIOS {
+  0% {
+    opacity: 0.2;
+    transform: scale(0.7) translateY(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes windowMaximize {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.92) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes windowRestore {
+  0% {
+    opacity: 0.7;
+    transform: scale(1.08) translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes windowClose {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7) translateY(60px);
+  }
+}
+
+/* Window Animation Classes */
+.window-anim-open {
+  animation: windowOpenIOS 0.35s ease;
+}
+
+.window-anim-maximize {
+  animation: windowMaximize 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.window-anim-restore {
+  animation: windowRestore 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.window-anim-close {
+  animation: windowClose 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Start Menu Animations --- */
+@keyframes startMenuOpen {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes startMenuClose {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95) translateY(30px);
+  }
+}
+
+.start-menu-anim-open {
+  animation: startMenuOpen 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.start-menu-anim-close {
+  animation: startMenuClose 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Context Menu Animation --- */
+@keyframes contextMenuPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.context-menu-anim-pop {
+  animation: contextMenuPop 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Notification Animations --- */
+@keyframes notifSwipeOutRight {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.notif-swipe-out {
+  animation: notifSwipeOutRight 0.3s ease-in-out forwards;
+}
+
+/* --- Desktop Icons Animations --- */
+@keyframes desktopIconsSlideLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes desktopIconsSlideRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.desktop-icons.anim-slide-left {
+  animation: desktopIconsSlideLeft 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.desktop-icons.anim-slide-right {
+  animation: desktopIconsSlideRight 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* --- Taskbar Animations --- */
+@keyframes taskbarSlideDown {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes taskbarSlideUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes taskbarSlideDownCenter {
+  0% {
+    transform: translateY(0%) translateX(-50%);
+  }
+  100% {
+    transform: translateY(100%) translateX(-50%);
+  }
+}
+
+@keyframes taskbarSlideUpCenter {
+  0% {
+    transform: translateY(100%) translateX(-50%);
+  }
+  100% {
+    transform: translateY(0%) translateX(-50%);
+  }
+}
+
+.taskbar.anim-slide-down {
+  animation: taskbarSlideDown 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.taskbar.anim-slide-up {
+  animation: taskbarSlideUp 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.app-launcher-mode .taskbar.anim-slide-down {
+  animation: taskbarSlideDownCenter 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.app-launcher-mode .taskbar.anim-slide-up {
+  animation: taskbarSlideUpCenter 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* --- Widget Panel Animations --- */
+@keyframes widgetsFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes widgetsFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes widgetsSlideRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes widgetsSlideInRight {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0%); }
+}
+
+.widgets-anim-in {
+  animation: widgetsFadeIn 0.3s forwards;
+}
+
+.widgets-anim-out {
+  animation: widgetsFadeOut 0.3s forwards;
+}
+
+/* --- Desktop Alert Animations --- */
+@keyframes desktopAlertPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.desktop-alert-pop {
+  animation: desktopAlertPop 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Snap Hint Animations --- */
+@keyframes snapHintZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes windowSnapZoom {
+  0% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.snap-hint {
+  animation: snapHintZoom 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- App Launcher Animations --- */
+@keyframes appLauncherGridZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes appLauncherGridZoomOut {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.85) translateY(30px);
+  }
+}
+
+@keyframes appLauncherProfileDropdownSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes appLauncherProfileDropdownSlideUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* --- Taskbar App Icon Animations --- */
+@keyframes taskbarAppIconIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes taskbarAppIconOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+/* --- Panel Animations --- */
+@keyframes slideInRightPanel {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes slideOutRightPanel {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes fadeInPanel {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.slide-in-right-panel {
+  animation: slideInRightPanel 0.3s ease-out;
+}
+
+.fade-in-panel {
+  animation: fadeInPanel 0.18s cubic-bezier(.4,0,.2,1);
+}
+
+/* --- Top Bar Animations --- */
+@keyframes topBarSlideDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes topBarSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+/* --- Taskbar Push Animations --- */
+@keyframes taskbarPushLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50px); }
+}
+
+/* --- Utility Animations --- */
+.transition-transform {
+  transition: transform 0.2s ease;
+}
+
+.transition-all {
+  transition: all 0.2s ease;
+}
+
+.transition-colors {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* --- Hover Effects --- */
+.scale-hover:hover {
+  transform: scale(1.05);
+}
+
+.scale-hover-small:hover {
+  transform: scale(1.02);
+}
+
+/* --- Mobile Responsive Animations --- */
+@media (max-width: 768px) {
+  .window-anim-open {
+    animation: windowOpenIOS 0.25s ease;
+  }
+  
+  .start-menu-anim-open,
+  .start-menu-anim-close {
+    animation-duration: 0.2s;
+  }
+  
+  .desktop-icons.anim-slide-left,
+  .desktop-icons.anim-slide-right,
+  .taskbar.anim-slide-down,
+  .taskbar.anim-slide-up {
+    animation-duration: 0.3s;
+  }
+}
+
+/* --- AI Chat Animations --- */
+.ai-chat-window {
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(100%);
+}
+
+.ai-chat-window.ai-chat-visible {
+  transform: translateX(0);
+}
+
+/* --- Notification Panel Animations --- */
+.notifications-panel {
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(100%);
+}
+
+.notifications-panel.notifications-visible {
+  transform: translateX(0);
+}
+
+/* --- Global Search Animations --- */
+.global-search-overlay {
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.global-search-overlay[style*="display: none"] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* --- Button Hover Animations --- */
+.toolbar-button,
+.window-control-btn,
+.taskbar-icon {
+  transition: all 0.2s ease;
+}
+
+.toolbar-button:hover,
+.window-control-btn:hover,
+.taskbar-icon:hover {
+  transform: scale(1.05);
+}
+
+/* --- Icon Animation Classes --- */
+.icon-hover:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+.icon-click:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+/* --- Performance Optimizations --- */
+.window,
+.desktop-icon,
+.taskbar,
+.start-menu,
+.context-menu,
+.notification-item {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* --- Reduced Motion Preferences --- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.1s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.1s !important;
+  }
+} 
+  }
+} 
+
+/* Animation for drag operations */
+@keyframes dragFeedback {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.widget-item.dragging {
+  animation: dragFeedback 0.3s ease-in-out;
+  opacity: 0.5;
+}
+
+/* ===== NOTIFICATION ANIMATIONS (CRITICAL MISSING) ===== */
+@keyframes notifSwipeOutRight {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+    border-radius: 14px !important;
+  }
+  90% {
+    opacity: 0.7;
+    transform: translateX(420px) scale(0.98);
+    border-radius: 14px !important;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(480px) scale(0.96);
+  }
+}
+
+/* ===== ALL DESKTOP ENVIRONMENT ANIMATIONS ===== */ 

@@ -1,0 +1,56 @@
+/* Point of Sale Application Styles */
+
+.point-of-sale-list-section {
+  margin-right: 5px;
+  min-width: 350px;
+  max-width: 400px;
+}
+
+.point-of-sale-list-section .point-of-sale-list {
+  padding: 10px !important;
+  overflow-y: auto !important;
+}
+
+.point-of-sale-app-content .compose-btn {
+  padding: 8px 0; 
+  background: var(--accent-color); 
+  color: #fff; 
+  border: none; 
+  border-radius: 8px; 
+  font-weight: 600; 
+  font-size: 15px;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-wrap: nowrap;
+}
+
+.point-of-sale-app-content .compose-btn:hover {
+  background-color: var(--accent-color-light);
+}
+
+.point-of-sale-list-item {
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 15px;
+}
+
+.point-of-sale-content {
+  flex: 1 1 auto;
+  overflow-x: auto !important;
+  overflow-y: auto !important;
+  min-height: 0;
+  padding: 32px;
+  color: #333;
+  background: var(--window-content);
+  border-radius: 0 0 15px 15px;
+  height: calc(100% - 45px);
+}
+
+.point-of-sale-app-window .window-main-content {
+  background-color: transparent;
+  overflow: hidden !important;
+  min-width: 100px;
+} 

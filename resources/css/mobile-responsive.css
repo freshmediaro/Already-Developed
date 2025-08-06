@@ -1,0 +1,429 @@
+/* Mobile Responsive Styles - 3-Screen Swipe System */
+
+/* Base mobile setup */
+@media (max-width: 1023px) {
+  html,
+  body,
+  .os-container {
+    overflow: hidden !important;
+    height: 100vh !important;
+    width: 100vw !important;
+  }
+
+  /* Main content area setup for mobile */
+  .main-content-area {
+    display: flex;
+    width: 300vw; /* 3 screens wide */
+    height: 100vh;
+    position: relative;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  /* Desktop area (home screen) */
+  .desktop-area {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Notifications screen */
+  #notifications-screen {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    flex-shrink: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  /* Widgets screen */
+  #widgets-screen {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    flex-shrink: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  /* Mobile state transitions */
+  .mobile-icons-active .main-content-area {
+    transform: translateX(-100vw); /* Show desktop (middle screen) */
+  }
+
+  .mobile-notifications-active .main-content-area {
+    transform: translateX(0); /* Show notifications (left screen) */
+  }
+
+  .mobile-widgets-active .main-content-area {
+    transform: translateX(-200vw); /* Show widgets (right screen) */
+  }
+
+  /* Notification cards styling for mobile */
+  .mobile-notifications-active .notif-card {
+    background-color: rgba(9, 1, 31, 0.25);
+    backdrop-filter: blur(18px);
+    border-radius: 18px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 16px;
+  }
+
+  .mobile-notifications-active .notif-card.unread {
+    background-color: var(--widget-bg);
+    backdrop-filter: blur(18px);
+    border-radius: 18px;
+  }
+
+  /* Hide certain elements on mobile */
+  .taskbar-icon#widgets-toggle-btn {
+    display: none !important;
+  }
+
+  .taskbar.taskbar-hidden-mobile {
+    display: none !important;
+  }
+
+  /* Calendar today panel hidden on mobile */
+  .calendar-today-panel-slide {
+    display: none;
+  }
+
+  /* Mobile profile top bar */
+  .mobile-profile-top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  .mobile-profile-top-bar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .mobile-profile-top-bar-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .site-logo-round {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .mobile-profile-top-bar-header-left span {
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .mobile-profile-header-right .toolbar-search-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .mobile-profile-header-right .toolbar-search-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Adjust desktop icons for mobile profile bar */
+  .desktop-icons {
+    margin-top: 80px;
+    padding-top: 20px;
+  }
+
+  /* App window sidebar styles for mobile */
+  .window-sidebar {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    bottom: 0;
+    width: 280px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .window-sidebar.show {
+    left: 0;
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+
+  .sidebar-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .sidebar-push-active {
+    transform: translateX(280px);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sidebar-block-interaction {
+    pointer-events: none;
+  }
+
+  .sidebar-block-interaction .window-sidebar,
+  .sidebar-block-interaction .sidebar-overlay {
+    pointer-events: auto;
+  }
+
+  /* Settings sidebar styles */
+  .settings-sidebar {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    bottom: 0;
+    width: 280px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .settings-sidebar.show {
+    left: 0;
+  }
+
+  /* App Store sidebar styles */
+  .app-store-sidebar {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    bottom: 0;
+    width: 280px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .app-store-sidebar.show {
+    left: 0;
+  }
+
+  /* Window fullscreen on mobile */
+  .window {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    z-index: 1000;
+  }
+
+  .window.minimized {
+    display: none !important;
+  }
+
+  /* Window content adjustments */
+  .window-content {
+    height: calc(100vh - 60px) !important; /* Account for title bar */
+    overflow: hidden;
+  }
+
+  .window-main-content {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Taskbar adjustments */
+  .taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 100;
+  }
+}
+
+/* Swipe to delete for notifications */
+.notif-card {
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.notif-swipe-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: #e74c3c;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 32px;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  height: 80px;
+  border-radius: 13px;
+}
+
+.notif-swipe-bg i {
+  color: #fff;
+  font-size: 28px;
+}
+
+.notif-card[style*="translateX"] {
+  z-index: 1;
+}
+
+/* Desktop view styles (when not mobile) */
+@media (min-width: 1024px) {
+  #widgets-screen {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    scrollbar-width: none !important;
+    z-index: 1 !important;
+    /* Key: Do NOT set pointer-events: auto here - let individual widgets handle it */
+    user-select: auto !important;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    transform: translateX(0);
+  }
+
+  #widgets-screen::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  #widgets-screen.widgets-hidden {
+    transform: translateX(100%);
+  }
+
+  .main-content-area {
+    display: block;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .desktop-area {
+    width: 100%;
+    height: 100vh;
+  }
+
+  #notifications-screen {
+    display: none; /* Hidden on desktop */
+  }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 767px) {
+  /* Extra small screens */
+  .mobile-profile-top-bar {
+    height: 70px;
+  }
+
+  .desktop-icons {
+    margin-top: 70px;
+  }
+
+  .taskbar {
+    height: 70px;
+  }
+}
+
+/* Landscape orientation warning for phones */
+@media (max-width: 767px) and (orientation: landscape) {
+  .orientation-warning {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .orientation-warning i {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .orientation-warning h3 {
+    margin-bottom: 8px;
+    font-size: 20px;
+  }
+
+  .orientation-warning p {
+    opacity: 0.8;
+    font-size: 16px;
+  }
+} 

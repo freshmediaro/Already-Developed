@@ -1,0 +1,287 @@
+/* Base Desktop OS Styles - Core Variables and Typography */
+
+:root {
+  /* Primary Color Scheme */
+  --primary-bg: #0c0021;
+  --secondary-bg: #100f21;
+  --window-bg: #050217d0;
+  --window-content: #100f21;
+  --window-header: #0c0021;
+  --context-menu-bg: #100f21c4;
+  --text-color: #fff;
+  --border-color: rgba(255, 255, 255, 0.05);
+  
+  /* Accent Colors */
+  --accent-color: #3576f6;
+  --accent-color-light: #359ff6;
+  --green-accent: #00cc66;
+  --yellow-accent: #fbbb1a;
+  --blue-accent: #1a73e8; 
+  --cyan-accent: #00bbcc;
+  --red-accent: #ff3a30;
+  --purple-accent: #a142f4;
+  --orange-accent: #ff9500;
+  
+  /* Icon Background Colors */
+  --icon-bg-blue: #4f6bfe;
+  --icon-bg-green: #68c23d;
+  --icon-bg-pink: #ff3b8d;
+  --icon-bg-cyan: #00c8d5;
+  --icon-bg-gray: #5a6377;
+  --orange-icon: #ff9500;
+  --green-icon: #68c23d;
+  --blue-icon: #4f6bfe;
+  --pink-icon: #ff3b8d;
+  --cyan-icon: #00c8d5;
+  --gray-icon: #5a6377;
+  --purple-icon: #a142f4;
+  --red-icon: #ff3a30;
+  
+  /* System Colors */
+  --os-gray: #646a86;
+  --os-gray-dark: #2c314d;
+  --widget-bg: #050217a6;
+  --input-bg: rgba(255, 255, 255, 0.04);
+  --input-bg-active: rgba(255, 255, 255, 0.08);
+  --dark-mode-hover: rgba(255, 255, 255, 0.04);
+  --window-toolbar-bg: rgba(255, 255, 255, 0.05);
+  --window-sidebar-bg: rgba(255, 255, 255, 0.03);
+  --window-sidebar-item-hover: rgba(255, 255, 255, 0.08);
+  --pink-accent: #ff3b8d;
+
+  /* Grid Layout */
+  --grid-cell-width: 80px;
+  --grid-cell-height: 100px;
+  --grid-gap: 3px;
+}
+
+/* ===== MISSING GRADIENT TEXT (CRITICAL) ===== */
+.gradient-text {
+  background: rgb(59, 163, 255);
+  background: -moz-linear-gradient(90deg, rgba(59, 163, 255, 1) 0%, rgba(23, 41, 181, 1) 31%, rgba(255, 52, 205, 1) 99%);
+  background: -webkit-linear-gradient(90deg, rgba(59, 163, 255, 1) 0%, rgba(23, 41, 181, 1) 31%, rgba(255, 52, 205, 1) 99%);
+  background: linear-gradient(90deg, rgba(59, 163, 255, 1) 0%, rgba(23, 41, 181, 1) 31%, rgba(255, 52, 205, 1) 99%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3ba3ff", endColorstr="#ff34cd", GradientType=1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===== MISSING ICON COLOR CLASSES (CRITICAL) ===== */
+.purple-icon {
+  background-color: var(--purple-accent);
+}
+
+.orange-icon {
+  background-color: var(--orange-icon);
+}
+
+.red-icon {
+  background-color: var(--red-icon);
+}
+
+.teal-icon {
+  background-color: var(--cyan-accent);
+}
+
+.pink-icon {
+  background-color: var(--pink-accent);
+}
+
+.yellow-icon {
+  background-color: var(--yellow-accent);
+}
+
+.blue-icon {
+  background-color: var(--icon-bg-blue);
+}
+
+.green-icon {
+  background-color: var(--icon-bg-green);
+}
+
+.cyan-icon {
+  background-color: var(--icon-bg-cyan);
+}
+
+.gray-icon {
+  background-color: var(--icon-bg-gray);
+}
+
+.blue-app-icon {
+  background-color: var(--blue-accent);
+}
+
+/* Base Element Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography */
+body {
+  user-select: none !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
+  background-color: var(--primary-bg);
+  background-image: url(../img/background.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--text-color);
+  overflow: hidden;
+  height: 100vh;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+textarea {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+button {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+input, textarea {
+  color: #fff;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track:hover {
+  background-color: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(87, 87, 87, 0.267);
+  border-radius: 16px;
+  border: 2px solid rgba(87, 87, 87, 0.267);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  border: 2px solid rgba(87, 87, 87, 0.507);
+  background-color: rgba(87, 87, 87, 0.507);
+}
+
+::-webkit-scrollbar-button {
+  display: none
+}
+
+/* Utility Classes */
+.gradient-text {
+  background: rgb(59, 163, 255);
+  background: -moz-linear-gradient(90deg, rgba(59, 163, 255, 1) 0%, rgba(23, 41, 181, 1) 31%, rgba(255, 52, 205, 1) 99%);
+  background: -webkit-linear-gradient(90deg, rgba(59, 163, 255, 1) 0%, rgba(23, 41, 181, 1) 31%, rgba(255, 52, 205, 1) 99%);
+  background: linear-gradient(90deg, rgba(59, 163, 255, 1) 0%, rgba(23, 41, 181, 1) 31%, rgba(255, 52, 205, 1) 99%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3ba3ff", endColorstr="#ff34cd", GradientType=1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Icon Color Classes */
+.purple-icon { background-color: var(--purple-accent); }
+.orange-icon { background-color: var(--orange-icon); }
+.red-icon { background-color: var(--red-icon); }
+.teal-icon { background-color: var(--cyan-accent); }
+.pink-icon { background-color: var(--pink-accent); }
+.yellow-icon { background-color: var(--yellow-accent); }
+.blue-icon { background-color: var(--icon-bg-blue); }
+.green-icon { background-color: var(--icon-bg-green); }
+.cyan-icon { background-color: var(--icon-bg-cyan); }
+.gray-icon { background-color: var(--icon-bg-gray); }
+.blue-app-icon { background-color: var(--blue-accent); }
+
+/* App Container */
+#app {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Main OS Container */
+.os-container {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(128, 0, 128, 0.3), transparent 70%);
+}
+
+/* Main Content Area */
+.main-content-area {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Desktop Area */
+.desktop-area {
+  position: relative;
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* Windows Container */
+.windows-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 50px);
+  z-index: 20;
+  pointer-events: none;
+}
+
+.windows-container > * {
+  pointer-events: all;
+}
+
+/* Drag Selector */
+#drag-selector {
+  position: absolute;
+  border: 1px solid #0078D4;
+  background-color: rgba(0, 120, 212, 0.3);
+  z-index: 5;
+  border-radius: 6px;
+}
+
+#drag-selector.hidden {
+  display: none;
+}
+
+/* Active Window Outline */
+.window.active {
+  outline: 1px solid var(--border-color);
+} 

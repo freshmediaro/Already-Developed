@@ -1,0 +1,143 @@
+/* Context Menu Styles */
+.context-menu {
+  position: absolute;
+  z-index: 2000;
+  background-color: var(--context-menu-bg);
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 10px;
+  min-width: 220px;
+  display: block;
+  font-size: 13px;
+  color: #e0e0e0;
+  backdrop-filter: blur(30px);
+}
+
+.context-menu.hidden {
+  display: none !important;
+}
+
+.context-menu-item,
+.context-menu-submenu-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  cursor: default;
+  white-space: nowrap;
+  transition: background-color 0.1s ease;
+  font-size: 12px;
+}
+
+.context-menu-item:hover,
+.context-menu-submenu-item:hover {
+  background-color: var(--dark-mode-hover);
+  border-radius: 6px;
+}
+
+.context-menu-item.disabled,
+.context-menu-submenu-item.disabled {
+  color: #777;
+  pointer-events: none;
+}
+
+.context-menu-item i,
+.context-menu-submenu-item i {
+  width: 20px;
+  margin-right: 12px;
+  text-align: center;
+  font-size: 14px;
+  color: #b0b0b0;
+}
+
+.context-menu-item.disabled i,
+.context-menu-submenu-item.disabled i {
+  color: #555;
+}
+
+.context-menu-item span,
+.context-menu-submenu-item span {
+  flex-grow: 1;
+}
+
+.context-menu-shortcut {
+  color: #999;
+  margin-left: auto;
+  padding-left: 20px;
+}
+
+.context-menu-separator {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 5px 0;
+}
+
+/* Submenu Styles */
+.context-menu.submenu .context-menu-item {
+  padding: 6px 25px;
+}
+
+.context-menu.submenu .context-menu-item i {
+  margin-left: -12px;
+}
+
+/* Specific Icon Colors */
+.context-menu-item .fa-trash {
+  color: #ff6b6b;
+}
+
+.context-menu-item .fa-folder-plus {
+  color: #54a0ff;
+}
+
+/* Context Menu Animation */
+@keyframes contextMenuPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.context-menu-anim-pop {
+  animation: contextMenuPop 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ensure context menu is above other elements */
+#context-menu {
+  z-index: 1000000;
+}
+
+/* Light Mode Context Menu Styles */
+body.light-windows .context-menu {
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+body.light-windows .context-menu-item,
+body.light-windows .context-menu-submenu-item {
+  color: #333;
+}
+
+body.light-windows .context-menu-item:hover,
+body.light-windows .context-menu-submenu-item:hover {
+  background-color: #f0f0f0;
+}
+
+body.light-windows .context-menu-item i,
+body.light-windows .context-menu-submenu-item i {
+  color: #666;
+}
+
+body.light-windows .context-menu-separator {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-windows .context-menu-shortcut {
+  color: #666;
+} 

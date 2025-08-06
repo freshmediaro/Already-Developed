@@ -1,0 +1,456 @@
+/* Contacts App Styles */
+.contacts-manager {
+  @apply h-full flex flex-col bg-desktop-window;
+}
+
+.contacts-header {
+  @apply border-b border-desktop-border bg-desktop-header p-4;
+}
+
+.header-actions {
+  @apply flex items-center justify-between mb-4;
+}
+
+.header-controls {
+  @apply flex items-center space-x-4;
+}
+
+.view-toggle {
+  @apply flex items-center space-x-1 bg-desktop-toolbar rounded-lg p-1;
+}
+
+.view-btn {
+  @apply p-2 rounded-lg text-white hover:bg-desktop-accent transition-colors;
+}
+
+.view-btn.active {
+  @apply bg-desktop-accent;
+}
+
+.new-contact-btn {
+  @apply px-4 py-2 bg-desktop-accent text-white rounded-lg hover:bg-desktop-accentLight transition-colors;
+}
+
+/* Stats Bar */
+.stats-bar {
+  @apply flex items-center space-x-6 mt-4;
+}
+
+.stat-item {
+  @apply text-center;
+}
+
+.stat-value {
+  @apply text-2xl font-bold text-white;
+}
+
+.stat-label {
+  @apply text-sm text-gray-400;
+}
+
+/* Contacts List */
+.contacts-list-container {
+  @apply flex-1 flex flex-col overflow-hidden;
+}
+
+.list-controls {
+  @apply flex items-center justify-between p-4 border-b border-desktop-border bg-desktop-content;
+}
+
+.search-and-filter {
+  @apply flex items-center space-x-3;
+}
+
+.search-container {
+  @apply relative;
+}
+
+.search-input {
+  @apply w-64 px-3 py-2 pl-10 bg-desktop-input border border-desktop-border rounded-lg text-white placeholder-gray-400;
+}
+
+.search-icon {
+  @apply absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400;
+}
+
+.filter-controls {
+  @apply flex items-center space-x-2;
+}
+
+.filter-select {
+  @apply px-3 py-2 bg-desktop-input border border-desktop-border rounded-lg text-white;
+}
+
+.list-actions {
+  @apply flex items-center space-x-2;
+}
+
+.action-btn {
+  @apply px-3 py-2 bg-desktop-toolbar border border-desktop-border rounded-lg text-white hover:bg-desktop-accent transition-colors;
+}
+
+/* Contacts Table */
+.contacts-table-container {
+  @apply flex-1 overflow-auto;
+}
+
+.contacts-table {
+  @apply w-full bg-desktop-content;
+}
+
+.contacts-table thead {
+  @apply bg-desktop-header sticky top-0;
+}
+
+.contacts-table th {
+  @apply px-4 py-3 text-left text-white font-medium border-b border-desktop-border;
+}
+
+.contacts-table th.sortable {
+  @apply cursor-pointer hover:bg-desktop-toolbar;
+}
+
+.contacts-table td {
+  @apply px-4 py-3 border-b border-desktop-border text-white;
+}
+
+.contact-row {
+  @apply hover:bg-desktop-toolbar cursor-pointer transition-colors;
+}
+
+.contact-name .contact-info {
+  @apply flex items-center;
+}
+
+.contact-avatar {
+  @apply mr-3;
+}
+
+.avatar-img {
+  @apply w-10 h-10 rounded-full object-cover;
+}
+
+.avatar-placeholder {
+  @apply w-10 h-10 rounded-full bg-desktop-accent flex items-center justify-center text-white font-medium;
+}
+
+.contact-details {
+  @apply min-w-0;
+}
+
+.name {
+  @apply font-medium text-white;
+}
+
+.job-title {
+  @apply text-sm text-gray-400;
+}
+
+.contact-company {
+  @apply text-white;
+}
+
+.contact-status .status-badge {
+  @apply px-2 py-1 rounded-full text-xs font-medium;
+}
+
+.status-active {
+  @apply bg-desktop-green bg-opacity-20 text-desktop-green;
+}
+
+.status-inactive {
+  @apply bg-desktop-gray bg-opacity-20 text-desktop-gray;
+}
+
+.status-lead {
+  @apply bg-desktop-yellow bg-opacity-20 text-desktop-yellow;
+}
+
+.status-prospect {
+  @apply bg-desktop-blue bg-opacity-20 text-desktop-blue;
+}
+
+.status-customer {
+  @apply bg-desktop-green bg-opacity-20 text-desktop-green;
+}
+
+.contact-methods {
+  @apply space-y-1;
+}
+
+.contact-email, .contact-phone {
+  @apply text-sm text-gray-400;
+}
+
+.tags-list {
+  @apply flex items-center space-x-1;
+}
+
+.tag {
+  @apply px-2 py-1 bg-desktop-accent bg-opacity-20 text-desktop-accent text-xs rounded;
+}
+
+.tag-more {
+  @apply px-2 py-1 bg-desktop-toolbar text-gray-400 text-xs rounded;
+}
+
+.contact-actions {
+  @apply flex items-center space-x-2;
+}
+
+.action-menu {
+  @apply flex items-center space-x-1;
+}
+
+.dropdown {
+  @apply relative;
+}
+
+.dropdown-toggle {
+  @apply p-2 rounded-lg hover:bg-desktop-toolbar transition-colors;
+}
+
+.dropdown-menu {
+  @apply absolute right-0 top-full mt-1 w-48 bg-desktop-content border border-desktop-border rounded-lg shadow-lg z-10 hidden;
+}
+
+.dropdown:hover .dropdown-menu {
+  @apply block;
+}
+
+.dropdown-item {
+  @apply w-full px-3 py-2 text-left text-white hover:bg-desktop-toolbar transition-colors flex items-center space-x-2;
+}
+
+.dropdown-item.danger {
+  @apply text-desktop-red hover:bg-desktop-red hover:bg-opacity-10;
+}
+
+/* Contact Details */
+.contact-details-container {
+  @apply flex-1 flex flex-col overflow-hidden;
+}
+
+.details-header {
+  @apply flex items-center justify-between p-4 border-b border-desktop-border bg-desktop-header;
+}
+
+.back-btn {
+  @apply flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-desktop-toolbar transition-colors;
+}
+
+.contact-header-info {
+  @apply flex items-center flex-1 mx-4;
+}
+
+.contact-avatar.large .avatar-img,
+.contact-avatar.large .avatar-placeholder {
+  @apply w-16 h-16;
+}
+
+.contact-info {
+  @apply ml-4;
+}
+
+.contact-info h2 {
+  @apply text-xl font-semibold text-white;
+}
+
+.job-title, .company {
+  @apply text-gray-400;
+}
+
+.contact-meta {
+  @apply flex items-center space-x-4 mt-2;
+}
+
+.contact-source {
+  @apply text-sm text-gray-400;
+}
+
+.contact-actions {
+  @apply flex items-center space-x-2;
+}
+
+.details-content {
+  @apply flex-1 flex overflow-hidden;
+}
+
+.details-main {
+  @apply flex-1 overflow-auto;
+}
+
+.details-sidebar {
+  @apply w-80 bg-desktop-content border-l border-desktop-border overflow-auto p-6;
+}
+
+/* Tabs */
+.details-tabs {
+  @apply flex border-b border-desktop-border bg-desktop-content;
+}
+
+.tab-btn {
+  @apply px-4 py-3 text-white hover:bg-desktop-toolbar transition-colors;
+}
+
+.tab-btn.active {
+  @apply bg-desktop-accent border-b-2 border-desktop-accentLight;
+}
+
+.tab-content {
+  @apply hidden p-6;
+}
+
+.tab-content.active {
+  @apply block;
+}
+
+/* Contact Overview */
+.contact-overview {
+  @apply space-y-6;
+}
+
+.overview-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+}
+
+.overview-item {
+  @apply space-y-1;
+}
+
+.overview-item label {
+  @apply text-sm font-medium text-gray-400;
+}
+
+.overview-item value {
+  @apply text-white;
+}
+
+.custom-fields {
+  @apply mt-8;
+}
+
+.custom-fields h4 {
+  @apply text-lg font-semibold text-white mb-4;
+}
+
+.custom-fields-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+}
+
+.custom-field {
+  @apply space-y-1;
+}
+
+/* Contact Methods */
+.contact-method {
+  @apply flex items-center space-x-3 py-2;
+}
+
+.method-value {
+  @apply flex-1 text-white;
+}
+
+.method-type {
+  @apply text-sm text-gray-400 capitalize;
+}
+
+/* Address Block */
+.address-block {
+  @apply mb-4;
+}
+
+.address-type {
+  @apply text-sm font-medium text-gray-400 mb-1;
+}
+
+.address-content {
+  @apply text-white;
+}
+
+/* Social Profiles */
+.social-profiles {
+  @apply space-y-2;
+}
+
+.social-link {
+  @apply flex items-center space-x-2 text-white hover:text-desktop-accent transition-colors;
+}
+
+/* Contact Notes */
+.contact-notes {
+  @apply bg-desktop-toolbar rounded-lg p-4 text-white;
+}
+
+/* Pagination */
+.pagination {
+  @apply flex items-center justify-center space-x-4 p-4 border-t border-desktop-border bg-desktop-content;
+}
+
+.page-btn {
+  @apply px-4 py-2 rounded-lg bg-desktop-toolbar text-white hover:bg-desktop-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.page-info {
+  @apply text-gray-400;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .contacts-manager.mobile-view .contacts-table-container {
+    @apply overflow-x-auto;
+  }
+  
+  .contacts-table {
+    @apply min-w-full;
+  }
+  
+  .search-input {
+    @apply w-full;
+  }
+  
+  .list-controls {
+    @apply flex-col space-y-3;
+  }
+  
+  .search-and-filter {
+    @apply w-full;
+  }
+  
+  .filter-controls {
+    @apply w-full flex-wrap;
+  }
+  
+  .details-content {
+    @apply flex-col;
+  }
+  
+  .details-sidebar {
+    @apply w-full border-l-0 border-t;
+  }
+  
+  .overview-grid, .custom-fields-grid {
+    @apply grid-cols-1;
+  }
+  
+  .stats-bar {
+    @apply grid grid-cols-2 gap-4;
+  }
+  
+  .contact-header-info {
+    @apply flex-col text-center;
+  }
+  
+  .contact-info {
+    @apply ml-0 mt-2;
+  }
+}
+
+/* Placeholder Views */
+.grid-placeholder,
+.editor-placeholder,
+.activity-placeholder,
+.interactions-placeholder,
+.related-placeholder {
+  @apply flex items-center justify-center h-full text-gray-400;
+} 

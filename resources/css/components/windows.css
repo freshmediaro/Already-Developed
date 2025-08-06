@@ -1,0 +1,743 @@
+/* Window System */
+.window {
+  position: absolute;
+  background-color: var(--window-bg);
+  border-radius: 12px;
+  box-shadow: 0px 0px 40px rgb(0 0 0 / 50%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  resize: both;
+  width: 800px;
+  height: 70%;
+  min-width: 350px;
+  min-height: 400px;
+  /*border: 1px solid var(--border-color);*/
+  backdrop-filter: blur(30px);
+  transform: translate3d(0, 0, 0);
+}
+
+.window.active {
+  outline: 1px solid var(--border-color);
+}
+
+.window.maximized {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: calc(100% - 50px) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.window.minimized {
+  display: none !important;
+}
+
+/* Window Header */
+.window-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /*background-color: var(--window-header);*/
+  padding: 4px 7px 4px 14px;
+  cursor: grab;
+}
+
+.window-title {
+  display: flex;
+  align-items: center;
+}
+
+.window-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.window-icon i {
+  font-size: 10px;
+}
+
+/* Window Controls */
+.window-controls {
+  display: flex;
+  align-items: center;
+  /* Vertically align buttons if needed */
+}
+
+.window-controls button {
+  background-color: transparent;
+  border: none;
+  color: var(--text-color);
+  /* Icon color, will be overridden by pseudo-elements */
+  padding: 0;
+  margin-left: 2px;
+  /* Minimal margin between buttons */
+  cursor: pointer;
+  width: 28px;
+  /* Standard width for Win11 controls */
+  height: 32px;
+  /* Standard height for Win11 controls */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* For pseudo-elements */
+}
+
+.window-controls button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  height: 25px;
+  padding: 14px;
+}
+
+.window-controls button.window-close:hover {
+  background-color: #E81123;
+  /* Win11 close hover red */
+  border-radius: 50px;
+  height: 25px;
+}
+
+/* Window Control Button Icons - Pseudo Elements for Win11-style icons */
+
+/* Minimize Button - Line at bottom */
+.window-controls button.window-minimize::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 1px;
+  background-color: var(--text-color);
+  transition: all 0.2s ease;
+}
+
+/* Maximize/Restore Button - Square outline */
+.window-controls button.window-maximize::before {
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--text-color);
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+/* Restore icon when maximized - overlapping squares */
+.window-controls button.window-maximize.restore::before {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--text-color);
+  background-color: transparent;
+  top: 45%;
+  left: 45%;
+}
+
+.window-controls button.window-maximize.restore::after {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: 1px solid var(--text-color);
+  border-bottom: none;
+  border-right: none;
+  background-color: transparent;
+  top: 35%;
+  left: 55%;
+}
+
+/* Close Button - X */
+.window-controls button.window-close::before,
+.window-controls button.window-close::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 1px;
+  background-color: var(--text-color);
+  transition: all 0.2s ease;
+}
+
+.window-controls button.window-close::before {
+  transform: rotate(45deg);
+}
+
+.window-controls button.window-close::after {
+  transform: rotate(-45deg);
+}
+
+.window-controls button.window-close:hover::before,
+.window-controls button.window-close:hover::after {
+  background-color: white;
+  /* X becomes white on red hover */
+}
+
+/* Popout Button - Arrow pointing out */
+.window-controls button.window-popout::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--text-color);
+  border-bottom: none;
+  border-left: none;
+  transform: rotate(-45deg);
+  top: 40%;
+  left: 35%;
+  transition: all 0.2s ease;
+}
+
+.window-controls button.window-popout::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--text-color);
+  border-top: none;
+  border-right: none;
+  background-color: transparent;
+  top: 50%;
+  left: 45%;
+  transition: all 0.2s ease;
+}
+
+/* Window Toolbar */
+.window-toolbar {
+  background-color: var(--window-toolbar-bg);
+  border-bottom: 1px solid var(--border-color);
+  padding: 8px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+}
+
+.window-toolbar-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.window-toolbar-button {
+  padding: 6px 12px;
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.window-toolbar-button:hover {
+  background-color: var(--dark-mode-hover);
+}
+
+.window-toolbar-button.active {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.window-toolbar-separator {
+  width: 1px;
+  height: 20px;
+  background-color: var(--border-color);
+  margin: 0 5px;
+}
+
+/* Window Content */
+.window-content {
+  flex: 1;
+  background-color: var(--window-content);
+  overflow: hidden;
+  position: relative;
+}
+
+.window-content-scrollable {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 15px;
+}
+
+.window-content-padding {
+  padding: 15px;
+}
+
+.window-content-no-padding {
+  padding: 0;
+}
+
+/* Window Statusbar */
+.window-statusbar {
+  height: 30px;
+  background-color: var(--window-header);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+.window-statusbar-left {
+  flex: 1;
+}
+
+.window-statusbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.window-statusbar-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Window Resize Handles */
+.window-resize-handle {
+  position: absolute;
+  z-index: 10;
+}
+
+.window-resize-handle.n {
+  top: -3px;
+  left: 8px;
+  right: 8px;
+  height: 6px;
+  cursor: n-resize;
+}
+
+.window-resize-handle.s {
+  bottom: -3px;
+  left: 8px;
+  right: 8px;
+  height: 6px;
+  cursor: s-resize;
+}
+
+.window-resize-handle.e {
+  top: 8px;
+  bottom: 8px;
+  right: -3px;
+  width: 6px;
+  cursor: e-resize;
+}
+
+.window-resize-handle.w {
+  top: 8px;
+  bottom: 8px;
+  left: -3px;
+  width: 6px;
+  cursor: w-resize;
+}
+
+.window-resize-handle.ne {
+  top: -3px;
+  right: -3px;
+  width: 12px;
+  height: 12px;
+  cursor: ne-resize;
+}
+
+.window-resize-handle.nw {
+  top: -3px;
+  left: -3px;
+  width: 12px;
+  height: 12px;
+  cursor: nw-resize;
+}
+
+.window-resize-handle.se {
+  bottom: -3px;
+  right: -3px;
+  width: 12px;
+  height: 12px;
+  cursor: se-resize;
+}
+
+.window-resize-handle.sw {
+  bottom: -3px;
+  left: -3px;
+  width: 12px;
+  height: 12px;
+  cursor: sw-resize;
+}
+
+/* Window Loading States */
+.window-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.window-loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-color);
+  border-top: 2px solid var(--accent-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Window Modal Overlay */
+.window-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+}
+
+.window-modal {
+  background-color: var(--window-bg);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(30px);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.window-modal-header {
+  padding: 20px 20px 15px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: between;
+}
+
+.window-modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  flex: 1;
+}
+
+.window-modal-close {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.window-modal-close:hover {
+  background-color: var(--dark-mode-hover);
+  color: #fff;
+}
+
+.window-modal-content {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+}
+
+/* Easy Mode Window Overrides */
+.easy-mode .window {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  z-index: 30;
+}
+
+.easy-mode .window-header {
+  height: 60px;
+  padding: 0 20px;
+}
+
+.easy-mode .window-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.easy-mode .window-controls {
+  gap: 15px;
+}
+
+.easy-mode .window-control {
+  width: 16px;
+  height: 16px;
+}
+
+.easy-mode .window-control.close {
+  order: 3;
+}
+
+.easy-mode .window-control.minimize,
+.easy-mode .window-control.maximize {
+  display: none;
+}
+
+/* App Launcher Mode Window Overrides */
+.app-launcher-mode .window {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Light Mode Window Styles */
+body.light-windows .window.active {
+  background-color: #e0e2ebf1 !important;
+}
+
+body.light-windows .window-title span {
+  font-weight: 500;
+}
+
+body.light-windows .window,
+body.light-windows .settings-app-window,
+body.light-windows .app-store-window,
+body.light-windows .calculator-window,
+body.light-windows .photoshop-window {
+  background-color: #e0e2ebd9 !important;
+  color: var(--os-gray-dark) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
+  border: 1px solid #e0e0e0;
+}
+
+body.light-windows .window-header,
+body.light-windows .settings-header {
+  color: var(--os-gray-dark) !important;
+}
+
+body.light-windows .window-title span,
+body.light-windows .window-title,
+body.light-windows .window-controls button,
+body.light-windows .window-controls button.window-popout i {
+  color: var(--os-gray-dark) !important;
+}
+
+body.light-windows .window-icon i, body.light-windows .app-store-content .icon-container i {
+  color: #fff !important;
+}
+
+body.light-windows .menu-toggle,
+body.light-windows .window-content,
+body.light-windows .settings-content,
+body.light-windows .app-store-main-content {
+  color: var(--os-gray-dark) !important;
+}
+
+body.light-windows .window-main-content {
+  background-color: #f7f7fa ;
+}
+
+/* Window Animations */
+@keyframes windowOpenIOS {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes windowClose {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+}
+
+@keyframes windowMaximize {
+  0% {
+    border-radius: 12px;
+  }
+  100% {
+    border-radius: 0;
+  }
+}
+
+@keyframes windowRestore {
+  0% {
+    border-radius: 0;
+  }
+  100% {
+    border-radius: 12px;
+  }
+}
+
+.window-open-anim {
+  animation: windowOpenIOS 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.window-close-anim {
+  animation: windowClose 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.window-maximize-anim {
+  animation: windowMaximize 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.window-restore-anim {
+  animation: windowRestore 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 1023px) {
+  .window {
+    width: 100% !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    resize: none !important;
+    min-width: initial !important;
+    /* Remove desktop min-width */
+    min-height: initial !important;
+    /* Remove desktop min-height */
+    backdrop-filter: blur(20px);
+  }
+
+  .window-maximize {
+    display: none !important;
+    /* Hide maximize button */
+  }
+
+  /* Adjust window header for smaller screens */
+  .window-header {
+    padding: 2px 8px !important;
+    /* Slightly reduce padding */
+  }
+} 
+
+/* --- Snap Overlay Styles --- */
+#snap-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 99999;
+  display: none;
+}
+
+.snap-hint {
+  position: absolute;
+  background: transparent;
+  border: 2px solid var(--accent-color);
+  border-radius: 18px;
+  pointer-events: none;
+  transition: background 0.18s, border 0.18s;
+  backdrop-filter: blur(50px);
+  z-index: 99999;
+}
+
+.snap-hint-maximize {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 50px);
+}
+
+.snap-hint-left {
+  top: 0;
+  left: 0;
+  width: 50vw;
+  height: calc(100vh - 50px);
+}
+
+.snap-hint-right {
+  top: 0;
+  left: 50vw;
+  width: 50vw;
+  height: calc(100vh - 50px);
+}
+
+/* Additional Window Controls */
+.window-controls button.window-popout {
+  background-color: transparent;
+  border: none;
+  color: var(--text-color);
+  padding: 0;
+  margin-left: 2px;
+  margin-right: 2px;
+  cursor: pointer;
+  width: 28px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.window-controls button.window-popout:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  height: 25px;
+}
+
+.window-controls button.window-popout i {
+  font-size: 12px;
+  color: var(--text-color);
+}
+
+.window-main-content:has(.settings-content) {
+  overflow-y: auto !important;
+  height: 100%;
+}
+
+.window-main-content.scrollable {
+  overflow-y: auto !important;
+}
+
+/* App-specific window sizing */
+.calculator-window-default-size {
+  width: 530px;
+  height: 510px;
+}
+
+.photoshop-window-default-size {
+  width: 90vw;
+  height: 85vh;
+} 

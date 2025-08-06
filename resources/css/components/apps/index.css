@@ -1,0 +1,170 @@
+/* App-specific styles */
+@import './calculator.css';
+@import './file-explorer.css';
+@import './settings.css';
+@import './site-builder.css';
+@import './app-store.css';
+@import './email.css';
+
+/* Business Apps */
+@import './messages.css';
+@import './orders-manager.css';
+@import './products-manager.css';
+@import './contacts.css';
+@import './point-of-sale.css';
+
+/* General App Styles */
+.app-container {
+  @apply h-full flex flex-col bg-white dark:bg-gray-800;
+}
+
+.app-header {
+  @apply flex items-center justify-between p-4;
+  @apply border-b border-gray-200 dark:border-gray-700;
+  @apply bg-gray-50 dark:bg-gray-700;
+}
+
+.app-title {
+  @apply text-lg font-semibold text-gray-900 dark:text-white;
+}
+
+.app-content {
+  @apply flex-1 overflow-auto p-4;
+}
+
+.app-sidebar {
+  @apply w-64 bg-gray-50 dark:bg-gray-700 border-r border-gray-200 dark:border-gray-600;
+  @apply flex flex-col;
+}
+
+.app-main-content {
+  @apply flex-1 flex flex-col;
+}
+
+/* App Loading States */
+.app-loading {
+  @apply flex items-center justify-center h-full;
+  @apply text-gray-500 dark:text-gray-400;
+}
+
+.app-loading-spinner {
+  @apply animate-spin w-8 h-8 mr-3;
+}
+
+/* App Error States */
+.app-error {
+  @apply flex flex-col items-center justify-center h-full p-8;
+  @apply text-center;
+}
+
+.app-error-icon {
+  @apply w-16 h-16 text-red-500 mb-4;
+}
+
+.app-error-title {
+  @apply text-lg font-semibold text-gray-900 dark:text-white mb-2;
+}
+
+.app-error-message {
+  @apply text-gray-600 dark:text-gray-300 mb-4;
+}
+
+.app-error-actions {
+  @apply flex space-x-3;
+}
+
+/* Common UI Elements for Apps */
+.app-button {
+  @apply px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white;
+  @apply rounded-lg font-medium transition-colors duration-150;
+  @apply focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+}
+
+.app-button.secondary {
+  @apply bg-gray-200 hover:bg-gray-300 text-gray-800;
+  @apply dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white;
+}
+
+.app-input {
+  @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600;
+  @apply rounded-lg bg-white dark:bg-gray-700;
+  @apply text-gray-900 dark:text-white placeholder-gray-500;
+  @apply focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+  @apply transition-colors duration-150;
+}
+
+.app-select {
+  @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600;
+  @apply rounded-lg bg-white dark:bg-gray-700;
+  @apply text-gray-900 dark:text-white;
+  @apply focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+  @apply transition-colors duration-150;
+}
+
+.app-textarea {
+  @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600;
+  @apply rounded-lg bg-white dark:bg-gray-700;
+  @apply text-gray-900 dark:text-white placeholder-gray-500;
+  @apply focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+  @apply transition-colors duration-150 resize-none;
+}
+
+/* App Navigation */
+.app-nav {
+  @apply flex space-x-1 p-2 bg-gray-100 dark:bg-gray-700;
+}
+
+.app-nav-item {
+  @apply px-3 py-2 rounded-lg text-sm font-medium;
+  @apply text-gray-600 dark:text-gray-300;
+  @apply hover:bg-white dark:hover:bg-gray-600;
+  @apply cursor-pointer transition-colors duration-150;
+}
+
+.app-nav-item.active {
+  @apply bg-white dark:bg-gray-600 text-blue-600 dark:text-blue-400;
+  @apply shadow-sm;
+}
+
+/* App Toolbar */
+.app-toolbar {
+  @apply flex items-center justify-between p-3;
+  @apply border-b border-gray-200 dark:border-gray-600;
+  @apply bg-gray-50 dark:bg-gray-700;
+}
+
+.app-toolbar-left,
+.app-toolbar-right {
+  @apply flex items-center space-x-2;
+}
+
+.app-toolbar-center {
+  @apply flex-1 flex items-center justify-center;
+}
+
+/* Mobile App Styles */
+@media (max-width: 768px) {
+  .app-sidebar {
+    @apply w-full;
+  }
+  
+  .app-content {
+    @apply p-3;
+  }
+  
+  .app-header {
+    @apply p-3;
+  }
+  
+  .app-toolbar {
+    @apply p-2;
+  }
+  
+  .app-nav {
+    @apply overflow-x-auto;
+  }
+  
+  .app-nav-item {
+    @apply whitespace-nowrap;
+  }
+} 
