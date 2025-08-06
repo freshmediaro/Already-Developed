@@ -1,0 +1,40 @@
+{
+  "name": "os-desktop-app",
+  "version": "1.0.0",
+  "description": "OS-style desktop application built with Laravel, Inertia.js, Vue 3, and TypeScript",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "type-check": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.7.16",
+    "@heroicons/vue": "^2.0.18",
+    "@inertiajs/vue3": "^1.0.14",
+    "axios": "^1.6.2",
+    "vue": "^3.3.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@vitejs/plugin-vue": "^4.5.0",
+    "@vue/tsconfig": "^0.4.0",
+    "autoprefixer": "^10.4.16",
+    "laravel-vite-plugin": "^1.0.0",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.3.6",
+    "typescript": "^5.3.2",
+    "vite": "^5.0.5",
+    "vue-tsc": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+} 
