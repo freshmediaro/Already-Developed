@@ -67,9 +67,8 @@ class IframeSecurityMiddleware
         $frameOptions = $tenantConfig['frame_options'] ?? 'SAMEORIGIN';
         $response->headers->set('X-Frame-Options', $frameOptions);
         
-        // Set Content Security Policy
-        $csp = $this->buildContentSecurityPolicy($tenantConfig, $request);
-        $response->headers->set('Content-Security-Policy', $csp);
+        // NOTE: CSP is set globally by SecurityHeadersMiddleware.
+        // Iframe-specific relaxations are handled there based on route context.
         
         // Set additional security headers
         $response->headers->set('X-Content-Type-Options', 'nosniff');

@@ -88,10 +88,8 @@ class SecurityHeadersMiddleware
         // X-Content-Type-Options: Prevents MIME type sniffing
         $response->headers->set('X-Content-Type-Options', 'nosniff');
 
-        // X-Frame-Options: Prevents clickjacking (except for iframe apps)
-        if (!$this->isIframeRoute($request)) {
-            $response->headers->set('X-Frame-Options', 'DENY');
-        }
+        // X-Frame-Options: Prevents clickjacking (relaxed for iframe routes)
+        $response->headers->set('X-Frame-Options', $this->isIframeRoute($request) ? 'SAMEORIGIN' : 'DENY');
 
         // X-XSS-Protection: Enables XSS filtering
         $response->headers->set('X-XSS-Protection', '1; mode=block');
@@ -107,7 +105,7 @@ class SecurityHeadersMiddleware
         // Permissions-Policy: Controls browser features
         $response->headers->set('Permissions-Policy', $this->buildPermissionsPolicy());
 
-        // Content-Security-Policy: Comprehensive CSP
+        // Content-Security-Policy: single source of truth
         $response->headers->set('Content-Security-Policy', $this->buildContentSecurityPolicy($request));
 
         // Cross-Origin-Embedder-Policy: Controls embedding of cross-origin resources
@@ -225,14 +223,19 @@ class SecurityHeadersMiddleware
         // Frame sources (for iframe applications)
         $frameSrc = ["'self'"];
         if ($this->isIframeRoute($request) || $this->needsExternalFrames($request)) {
-            $frameSrc[] = "https://www.photopea.com";
-            $frameSrc[] = "https://photopea.com";
-            // Add other allowed iframe sources based on tenant config
-            if ($tenant && isset($tenant->data['allowed_iframe_domains'])) {
-                foreach ($tenant->data['allowed_iframe_domains'] as $domain) {
-                    $frameSrc[] = "https://{$domain}";
-                    $frameSrc[] = "https://*.{$domain}";
-                }
+            // Default allowlist
+            $allowedDomains = [
+                'photopea.com',
+                'www.photopea.com',
+            ];
+            // Tenant-configured allowlist
+            if ($tenant && isset($tenant->data['allowed_iframe_domains']) && is_array($tenant->data['allowed_iframe_domains'])) {
+                $allowedDomains = array_unique(array_merge($allowedDomains, $tenant->data['allowed_iframe_domains']));
+            }
+            foreach ($allowedDomains as $domain) {
+                $domain = ltrim($domain, '.');
+                $frameSrc[] = "https://{$domain}";
+                $frameSrc[] = "https://*.{$domain}";
             }
         }
         $policies[] = "frame-src " . implode(' ', $frameSrc);
@@ -255,9 +258,16 @@ class SecurityHeadersMiddleware
         // Form action
         $policies[] = "form-action 'self'";
 
-        // Frame ancestors (prevent embedding except for allowed cases)
-        if ($this->allowsEmbedding($request)) {
-            $policies[] = "frame-ancestors 'self' https:";
+        // Frame ancestors (who can embed our pages)
+        if ($this->isIframeRoute($request)) {
+            // Allow same-origin and tenant-configured ancestors for iframe pages
+            $ancestors = ["'self'"];
+            if ($tenant && isset($tenant->data['allowed_frame_ancestors']) && is_array($tenant->data['allowed_frame_ancestors'])) {
+                foreach ($tenant->data['allowed_frame_ancestors'] as $ancestor) {
+                    $ancestors[] = $ancestor;
+                }
+            }
+            $policies[] = 'frame-ancestors ' . implode(' ', array_unique($ancestors));
         } else {
             $policies[] = "frame-ancestors 'none'";
         }

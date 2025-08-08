@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\DesktopConfiguration;
 use App\Models\InstalledApp;
 use App\Models\Notification;
+use Illuminate\Support\Facades\Auth as AuthFacade;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 
 /**
  * Desktop Controller - Manages desktop application interface and configuration
@@ -64,6 +67,120 @@ use Illuminate\Validation\Rule;
  */
 class DesktopController extends Controller
 {
+    /**
+     * Render tenant desktop via Inertia
+     */
+    public function index(Request $request): InertiaResponse
+    {
+        $user = Auth::user();
+        $currentTeam = $user?->currentTeam;
+        $allTeams = method_exists($user, 'allTeams') ? $user->allTeams() : [];
+
+        // Preferences
+        $preferences = null;
+        if ($user && $currentTeam) {
+            $preferences = DesktopConfiguration::where('user_id', $user->id)
+                ->where('team_id', $currentTeam->id)
+                ->first();
+        }
+
+        // Installed apps
+        $installedApps = [];
+        if ($currentTeam) {
+            $installedApps = InstalledApp::where('team_id', $currentTeam->id)
+                ->where('is_active', true)
+                ->orderBy('app_name')
+                ->get();
+        }
+
+        return Inertia::render('Desktop', [
+            'user' => $user,
+            'currentTeam' => $currentTeam,
+            'allTeams' => $allTeams,
+            'userPreferences' => $preferences,
+            'installedApps' => $installedApps,
+            'desktopConfig' => $preferences,
+        ]);
+    }
+
+    /**
+     * Aggregate desktop data for Vue layout
+     */
+    public function data(Request $request): JsonResponse
+    {
+        $user = Auth::user();
+        $teamId = $user?->currentTeam?->id;
+
+        $installed = $teamId
+            ? InstalledApp::where('team_id', $teamId)->where('is_active', true)->orderBy('app_name')->get()
+            : collect();
+
+        // Map to UI structures expected by frontend
+        $availableApps = $installed->map(function ($app) {
+            return [
+                'id' => $app->app_id,
+                'name' => $app->app_name,
+                'description' => $app->description ?? null,
+                'iconType' => 'fontawesome',
+                'icon' => $app->icon ?? 'fas fa-puzzle-piece',
+                'category' => $app->category ?? 'utilities',
+                'isPinned' => (bool) ($app->pinned_to_taskbar ?? false),
+            ];
+        })->values();
+
+        $taskbarApps = $availableApps->filter(fn ($a) => $a['isPinned'])->map(function ($a) {
+            return [
+                'id' => $a['id'],
+                'title' => $a['name'],
+                'iconType' => $a['iconType'],
+                'icon' => $a['icon'],
+                'isActive' => false,
+                'hasNotification' => false,
+            ];
+        })->values();
+
+        return response()->json([
+            'desktopIcons' => [],
+            'taskbarApps' => $taskbarApps,
+            'availableApps' => $availableApps,
+            'notifications' => [],
+            'widgets' => [],
+        ]);
+    }
+
+    /**
+     * Global desktop search across apps and (optionally) content
+     */
+    public function search(Request $request): JsonResponse
+    {
+        $q = (string) $request->query('q', '');
+        $user = Auth::user();
+        $teamId = $user?->currentTeam?->id;
+
+        $results = [];
+        if ($teamId && strlen($q) > 0) {
+            $apps = InstalledApp::where('team_id', $teamId)
+                ->where('is_active', true)
+                ->where(function ($query) use ($q) {
+                    $query->where('app_name', 'like', "%$q%")
+                          ->orWhere('app_id', 'like', "%$q%");
+                })
+                ->orderBy('app_name')
+                ->limit(20)
+                ->get();
+
+            foreach ($apps as $app) {
+                $results[] = [
+                    'type' => 'app',
+                    'appId' => $app->app_id,
+                    'title' => $app->app_name,
+                    'icon' => $app->icon ?? 'fas fa-puzzle-piece',
+                ];
+            }
+        }
+
+        return response()->json($results);
+    }
     /**
      * Get desktop configuration for current user and team
      *
@@ -367,5 +484,55 @@ class DesktopController extends Controller
         $app->update(['last_used_at' => now()]);
 
         return response()->json(['message' => 'App usage updated']);
+    }
+
+    /**
+     * Windows state - basic in-memory (session) storage as MVP
+     */
+    public function getWindows(Request $request): JsonResponse
+    {
+        $windows = session()->get('desktop_windows', []);
+        return response()->json($windows);
+    }
+
+    public function saveWindow(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'id' => 'required|string|max:100',
+            'title' => 'required|string|max:255',
+            'x' => 'nullable|integer',
+            'y' => 'nullable|integer',
+            'width' => 'nullable|integer',
+            'height' => 'nullable|integer',
+        ]);
+        $windows = session()->get('desktop_windows', []);
+        $windows[$validated['id']] = array_merge($windows[$validated['id']] ?? [], $validated);
+        session()->put('desktop_windows', $windows);
+        return response()->json($windows[$validated['id']]);
+    }
+
+    public function updateWindowPosition(string $windowId, Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'x' => 'nullable|integer',
+            'y' => 'nullable|integer',
+            'width' => 'nullable|integer',
+            'height' => 'nullable|integer',
+        ]);
+        $windows = session()->get('desktop_windows', []);
+        if (!isset($windows[$windowId])) {
+            return response()->json(['message' => 'Not found'], 404);
+        }
+        $windows[$windowId] = array_merge($windows[$windowId], $validated);
+        session()->put('desktop_windows', $windows);
+        return response()->json($windows[$windowId]);
+    }
+
+    public function closeWindow(string $windowId): JsonResponse
+    {
+        $windows = session()->get('desktop_windows', []);
+        unset($windows[$windowId]);
+        session()->put('desktop_windows', $windows);
+        return response()->json(['message' => 'Closed']);
     }
 } 
