@@ -31,6 +31,29 @@ Route::get('/', [DesktopController::class, 'index'])->name('desktop');
 // API Routes
 Route::prefix('api')->middleware(['auth:sanctum', 'api-logging', 'cache-headers:api'])->group(function () {
 
+    // Desktop data and search (used by Vue layout)
+    Route::prefix('desktop')->group(function () {
+        Route::get('/data', [DesktopController::class, 'data']);
+        Route::get('/search', [DesktopController::class, 'search']);
+
+        // Preferences (proxy to DesktopController configuration)
+        Route::get('/preferences', [DesktopController::class, 'getConfiguration']);
+        Route::put('/preferences', [DesktopController::class, 'updateConfiguration']);
+
+        // Apps management (installed/pin/uninstall/update)
+        Route::get('/apps', [DesktopController::class, 'getInstalledApps']);
+        Route::get('/apps/installed', [DesktopController::class, 'getInstalledApps']);
+        Route::post('/apps/install', [DesktopController::class, 'installApp']);
+        Route::put('/apps/{app}', [DesktopController::class, 'updateApp']);
+        Route::delete('/apps/{app}', [DesktopController::class, 'uninstallApp']);
+
+        // Windows state (basic stubs for now)
+        Route::get('/windows', [DesktopController::class, 'getWindows']);
+        Route::post('/windows', [DesktopController::class, 'saveWindow']);
+        Route::patch('/windows/{windowId}/position', [DesktopController::class, 'updateWindowPosition']);
+        Route::delete('/windows/{windowId}', [DesktopController::class, 'closeWindow']);
+    });
+
     // AI Token Management
     Route::prefix('ai-tokens')->middleware(['wallet-tenant', 'rate-limit:wallet-operations', 'request-validation:wallet'])->group(function () {
         Route::get('/balance', [AiTokenController::class, 'getBalance']);
